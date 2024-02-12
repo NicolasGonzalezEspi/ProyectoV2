@@ -72,4 +72,15 @@ class AdminSQliteOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return count > 0;
     }
+
+    public boolean crearUsuario(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", username);
+        values.put("password", password);
+        long resultado = db.insert("usuarios", null, values);
+        db.close();
+        return resultado != -1;
+    }
+
 }

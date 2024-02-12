@@ -54,4 +54,24 @@ public class LoginActivity extends AppCompatActivity {
         // Cerrar la base de datos
         db.close();
     }
+
+    public void crearUsuario(View view) {
+        EditText nombreEditText = findViewById(R.id.editTextTextPassword);
+        EditText contrasenaEditText = findViewById(R.id.editTextTextPassword2);
+
+        String username = nombreEditText.getText().toString();
+        String password = contrasenaEditText.getText().toString();
+
+        boolean usuarioCreado = dbHelper.crearUsuario(username, password);
+        if (usuarioCreado) {
+            Toast.makeText(this, "Usuario creado satisfactoriamente", Toast.LENGTH_SHORT).show();
+            nombreEditText.setText("");
+            contrasenaEditText.setText("");
+        } else {
+            Toast.makeText(this, "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
+            nombreEditText.setText("");
+            contrasenaEditText.setText("");
+        }
+    }
+
 }
