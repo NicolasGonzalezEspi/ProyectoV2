@@ -41,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         boolean credencialesCorrectas = dbHelper.verificarCredenciales(username, password);
 
         if (credencialesCorrectas) {
+            nombreEditText.setText("");
+            contrasenaEditText.setText("");
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
@@ -59,8 +61,13 @@ public class LoginActivity extends AppCompatActivity {
         EditText nombreEditText = findViewById(R.id.editTextTextPassword);
         EditText contrasenaEditText = findViewById(R.id.editTextTextPassword2);
 
-        String username = nombreEditText.getText().toString();
-        String password = contrasenaEditText.getText().toString();
+        String username = nombreEditText.getText().toString().trim();
+        String password = contrasenaEditText.getText().toString().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Rellena usuario y contraseña", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         boolean usuarioCreado = dbHelper.crearUsuario(username, password);
         if (usuarioCreado) {
@@ -68,10 +75,11 @@ public class LoginActivity extends AppCompatActivity {
             nombreEditText.setText("");
             contrasenaEditText.setText("");
         } else {
-            Toast.makeText(this, "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ese usuario ya existe", Toast.LENGTH_SHORT).show();
             nombreEditText.setText("");
             contrasenaEditText.setText("");
         }
     }
+
 
 }

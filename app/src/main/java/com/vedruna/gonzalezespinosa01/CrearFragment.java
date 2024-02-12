@@ -74,6 +74,10 @@ public class CrearFragment extends Fragment {
 
                         // Mostrar un Toast con el resultado de la operación
                         if (result != -1) {
+                            etCodigo.setText("");
+                            etNombre.setText("");
+                            etDescripcion.setText("");
+                            etPrecio.setText("");
                             Toast.makeText(getContext(), "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "Error al agregar el producto", Toast.LENGTH_SHORT).show();
